@@ -20,8 +20,8 @@ namespace sict
 	{
 	private:
 			int value()const;
-			int errCode();
-			void set(int year, int month, int day, int hour, int min);
+
+			int valid();
 
 			int _min;
 			int _hour;
@@ -36,6 +36,9 @@ namespace sict
 			Date();
 			Date(int year, int month, int day);
 			Date(int year, int month, int day, int hour, int min = 0);
+
+			int errCode()const;
+			void errCode(int errorCode);
 
 			void set();
 			void set(int year, int month, int day, int hour, int min);
@@ -57,5 +60,7 @@ namespace sict
 			std::istream& read(std::istream& is = std::cin);
 			std::ostream& write(std::ostream& ostr = std::cout)const;
 	};
+	std::ostream& operator<<(std::ostream&, const Date&);
+  	std::istream& operator>>(std::istream&, Date&);
 }
 #endif

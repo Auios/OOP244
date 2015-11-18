@@ -4,26 +4,37 @@
 using namespace std;
 #include "Date.h"
 #include "POS.h"
-namespace sict{
-
-void Date::set()
+namespace sict
 {
-	time_t t = time(NULL);
-	tm lt = *localtime(&t);
-	_day = lt.tm_mday;
-	_month = lt.tm_mon + 1;
-	_year = lt.tm_year + 1900;
 
-	if (dateOnly())
+	void Date::set()
 	{
-		_hour = _min = 0;
+		time_t t = time(NULL);
+		tm lt = *localtime(&t);
+		_day = lt.tm_mday;
+		_month = lt.tm_mon + 1;
+		_year = lt.tm_year + 1900;
+
+		if (dateOnly())
+		{
+			_hour = _min = 0;
+		}
+		else
+		{
+			_hour = lt.tm_hour;
+			_min = lt.tm_min;
+		}
 	}
-	else
+
+	void Date::set(int year, int month, int day, int hour, int min)
 	{
-		_hour = lt.tm_hour;
-		_min = lt.tm_min;
+		_year = year;
+		_month = month;
+		_day = day;
+		_hour = hour;
+		_min = min;
+		_readErrorCode = NO_ERROR;
 	}
-}
 
 	int Date::value()const
 	{
@@ -67,19 +78,14 @@ void Date::set()
 		_readErrorCode = NO_ERROR;
 	}
 
-	void Date::set(int year, int month, int day, int hour, int min)
-	{
-		_year = year;
-		_month = month;
-		_day = day;
-		_hour = hour;
-		_min = min;
-		_readErrorCode = NO_ERROR;
-	}
-
-	int Date::errCode()
+	int Date::errCode()const
 	{
 		return _readErrorCode;
+	}
+
+	void Date::errCode(int errorCode)
+	{
+		_readErrorCode = errorCode;
 	}
 
 	bool Date::bad()const
@@ -132,25 +138,102 @@ void Date::set()
 		return this->value() <= D.value();
 	}
 
-	std::istream& Date::read(std::istream& is = std::cin)
+	int Date::valid()
 	{
-		/*Input formatted text
-			...
-			If format = YYYY/MM/DD,hh:mm
-		*/
-
-		if (_dateOnly) /*or if format is true*/
+		if(_dateOnly)
 		{
-			
+			if (_year > MAX_YEAR || _year < MIN_YEAR)
+			{
+				return YEAR_ERROR;
+			}
+			else if (_month > 12 || _month < 1)
+			{
+				return MON_ERROR;
+			}
+			else if (_day < 0 || _day > mdays())
+			{
+				return DAY_ERROR;
+			}
+		}
+
+		if(!_dateOnly)
+		{	
+			if (_year > MAX_YEAR || _year < MIN_YEAR)
+			{
+				return YEAR_ERROR;
+			}
+			else if (_month > 12 || _month < 1)
+			{
+				return MON_ERROR;
+			}
+			else if (_day < 0 || _day > mdays())
+			{
+				return DAY_ERROR;
+			}
+			else if(_hour < 0 || _hour > MAX_HOUR)
+			{
+				return HOUR_ERROR;
+			}
+			else if(_min < 0 || _min > MAX_MIN)
+			{
+				return MIN_ERROR;
+			}
+		}
+		return NO_ERROR;
+	}
+
+	std::istream& Date::read(std::istream& is)
+	{
+		is >> _year;
+		is.ignore(4,'/');
+
+		is >> _month;
+		is.ignore(2,'/');
+
+		is >> _day;
+
+		if(!_dateOnly)
+		{
+			is.ignore(5,',');
+
+			is >> _hour;
+			is.ignore(2,':');
+
+			is >> _min;
+		}
+		
+		errCode(valid());
+		if (is.fail())
+		{
+			_readErrorCode = CIN_FAILED;
+			return is;
+		}
+		
+		return is;
+	}
+
+	std::ostream& Date::write(std::ostream& os) const
+	{
+		if(_dateOnly)
+		{
+			os << _year << '/' << std::right << std::setfill('0') << std::setw(2) << _month << '/' << std::right << std::setfill('0') << std::setw(2) << _day;
 		}
 		else
 		{
-			/*No prompt*/
+			os << _year << '/' << std::right << std::setfill('0') << std::setw(2) << _month << '/' << std::right << std::setfill('0') << std::setw(2) << _day << ", " << std::right << std::setfill('0') << std::setw(2) << _hour << ':' << std::right << std::setfill('0') << std::setw(2) << _min;
 		}
+		return os;
 	}
 
-	std::ostream& Date::write(std::ostream& ostr = std::cout)const
+	std::ostream& operator<<(std::ostream& os, const Date& d)
 	{
+		d.write(os);
+		return os;
+	}
 
+	std::istream& operator>>(std::istream& is, Date& d)
+	{
+		d.read(is);
+		return is;
 	}
 }
