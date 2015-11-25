@@ -1,0 +1,78 @@
+Script started on Sun 15 Nov 2015 08:49:22 PM EST
+fardad.soleimanloo@matrix:~/oop244/DEV-Workshops/FinalProject/ms1> a.out
+This is a program to test your Date class for submission.
+This means if your code passes the tests, your code meets the minimum
+requirement for submission and may still be asked to be resubmitted if there
+are major problems with your coding.
+If the program pauses with no message displayed, it means your read function
+is not implemented properly.
+If you understand this, please type:  "Yes, I do."  
+        and press <ENTER> to continue: Yes, I do.
+Thank you, starting the test: 
+
+Checking defined values, POS.h: 
+Passed!
+Checking define values for error code in Data.h
+Passed!
+Testing Date(int, int, int) constructor and operator>> overload; 
+enter the following date, 2018/10/18
+>2018/10/18
+Passed!
+Testing Date(int, int, int,int,int) constructor and operator>> overload; 
+enter the following date, 2015/9/7, 14:30
+>2015/9/7, 14:30
+Passed!
+Testing Date(int, int, int,int,int=0) constructor and operator>> overload; 
+enter the following date, 2015/9/7, 15:0
+>2015/9/7, 15:0
+Passed!
+Testing the logical operators: 
+testing operator==
+passed!
+testing operator>=
+passed!
+testing operator<=
+passed!
+testing operator!=
+passed!
+testing operator<
+passed!
+testing operator>
+passed!
+testing operator<=
+passed!
+testing operator>=
+passed!
+Testing error handling in read funciton;
+cin faliure detection, 
+Please enter the following string "abcd": abcd
+passed!
+Year validation, 
+Please enter the following string "10/1/1": 10/1/1
+You entered: 10/01/01
+passed!
+Month validation, 
+Please enter the following string "2000/13/1": 2000/13/1
+You entered: 2000/13/01
+Passed
+Day validation, 
+Please enter the following string "2000/1/50": 2000/1/50
+You entered: 2000/01/50
+Passed!
+Day validation, leap year:
+Please enter the following string "2016/2/29": 2016/2/29
+You entered: 2016/02/29
+passed!
+Hour validation, 
+Please enter the following string "2000/1/1, 25:10": 2000/1/1, 25:10
+You entered: 2000/01/01, 25:10
+Passed!
+Minute validation, 
+Please enter the following string "2000/1/1, 23:60": 2000/1/1, 23:60
+You entered: 2000/01/01, 23:60
+Passed!
+You passed all the tests!
+fardad.soleimanloo@matrix:~/oop244/DEV-Workshops/FinalProject/ms1> exit
+exit
+
+Script done on Sun 15 Nov 2015 08:51:14 PM EST

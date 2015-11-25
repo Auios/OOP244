@@ -1,0 +1,55 @@
+Testing Enrollment objects
+
+----------------------------------------------
+Invalid enrollment!
+Not enrolled
+Invalid enrollment!
+
+There is not a conflict!
+----------------------------------------------
+College English
+EAC150, Year: 2015 semester: 1 Slot: 5
+Status: Not enrolled.
+Not enrolled
+Invalid enrollment!
+
+There is not a conflict!
+----------------------------------------------
+College English
+EAC150, Year: 2015 semester: 1 Slot: 5
+Status: Not enrolled.
+Not enrolled
+Object Oriented Programming
+OOP244, Year: 2015 semester: 1 Slot: 5
+Status: Not enrolled.
+
+There is a conflict!
+----------------------------------------------
+College English
+EAC150, Year: 2015 semester: 1 Slot: 5
+Status: Not enrolled.
+Not enrolled
+Object Oriented Programming
+OOP244, Year: 2015 semester: 1 Slot: 5
+Status: Enrolled.
+
+There is a conflict!
+----------------------------------------------
+College English
+EAC150, Year: 2015 semester: 1 Slot: 5
+Status: Not enrolled.
+Not enrolled
+Invalid enrollment!
+
+There is not a conflict!
+
+Only index 0 should be valid:
+index: 0 - Valid.
+index: 1 - Not valid.
+index: 2 - Not valid.
+index: 3 - Not valid.
+index: 4 - Not valid.
+index: 5 - Not valid.
+index: 6 - Not valid.
+index: 7 - Not valid.
+index: 8 - Not valid.

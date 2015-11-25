@@ -1,0 +1,8 @@
+***Reflection for Workshop 2 Home***
+Connor Ngo
+
+Using public methods to indirectly access data inside the private class I can manipulate things in a safe
+way VIA (getters and setters). Const insures that variables cannot be changed within the function/class
+incase I made some mistakes itll be easier to debug. The .display(???) function was overloaded to properly
+handle dynamic situations within the code. However, I could have used a switch instead. I think
+overloading was a better method to handle it.

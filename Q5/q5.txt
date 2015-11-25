@@ -1,0 +1,1 @@
+Change it to a pure virtual function

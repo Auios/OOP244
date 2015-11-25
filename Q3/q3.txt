@@ -1,0 +1,4 @@
+bool operator==(const Animal& thisName, const char* otherName)
+{
+	return !(strcmp(thisName.name(),otherName));
+}

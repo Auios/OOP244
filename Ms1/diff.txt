@@ -1,0 +1,10 @@
+
+In line number 63 of your output:
+The output should be:
+Please enter the following string "2016/2/29": 2016/2/29
+But your output is: 
+Please enter the following string "2016/2/29": 2000\b \b\b \b16^C
+                                                 ^
+-------------------------------------------------|
+Professors character ASCII code: hex(31), dec(49)
+un-matched character ASCII code: hex(30), dec(48)

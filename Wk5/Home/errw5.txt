@@ -1,0 +1,2 @@
+Contact.cpp: In copy constructor ‘sict::Contact::Contact(const sict::Contact&)’:
+Contact.cpp:34:18: error: argument of type ‘bool (sict::Contact::)()const’ does not match ‘bool’

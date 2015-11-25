@@ -1,0 +1,13 @@
+class ItemContainer : public Container
+{
+private:
+	int _serialNumber;
+public:
+	std::ostream& display(std::ostream& os)const;
+};
+
+std::ostream& ItemContainer::display(std::ostream& os) const
+{
+	os << container::display() << ", " << _serialNumber;
+	return os;
+}

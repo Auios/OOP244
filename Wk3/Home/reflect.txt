@@ -1,0 +1,18 @@
+***Reflection for Workshop 3***
+Connor Ngo
+Section SAB
+
+1. According to what I've read in books, most modern systems will have their own "safe guards" against
+	memory leaks from bad programs. But for the systems that do not have these guards, dynamic memory that is not
+	deallocated will never be deallocated for future programs to use until the system is rebooted. If the program
+	continues to leak memory it will be harder for the machine to find available space to store memory and thus making
+	the machine slower as it has to look longer.
+
+2. Two methods for formating IOStream are setfill('?') which fills empty space to '?' and left which justifies text
+	to the left and right which justifies text to the right.
+
+3. Dynamic memory is required because the program does not know how many weather reports are going to inputted by the user.
+	The programmer could have pre-allocated a fixed amount of memory for the user so the program would know prior to the user
+	inputting the amount, however if the user inputted more reports than the program had already allocated then the program would
+	not complete the duties properly. As a bonus as well dynamically allocating memory is great for efficient memory usage during
+	run time.

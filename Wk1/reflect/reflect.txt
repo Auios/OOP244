@@ -1,0 +1,4 @@
+1. The benefit of dividing the solution into two modules is that sections of the code can now be reused in other programs. It also makes the code easier for reading and debugging.
+
+2. a. -o means to rename the output file
+   b. -Wall enables warnings

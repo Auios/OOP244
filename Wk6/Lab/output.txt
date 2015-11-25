@@ -1,0 +1,13 @@
+: $0.00
+Saving: $10000.99
+Checking: $100.99
+--------
+Joint: $10101.98
+Saving: $10000.99
+Checking: $100.99
+--------
+Saving: $10101.98
+Saving: $10101.98
+Checking: $100.99
+--------
+Total balance: 20304.95

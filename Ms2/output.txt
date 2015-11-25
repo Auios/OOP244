@@ -1,0 +1,24 @@
+Script started on Wed 25 Nov 2015 11:19:03 AM EST
+cango@matrix:~/Adat/OOP244/Milestone/2> ma[Ks2
+Linear: one two 
+As is: 
+one
+two
+
+Enter the folowing: 
+three<ENTER>
+four<ENTER>
+<Ctrl-D>
+
+three
+four
+one two three four 
+one
+two
+three
+four
+
+cango@matrix:~/Adat/OOP244/Milestone/2> exit
+exit
+
+Script done on Wed 25 Nov 2015 11:19:18 AM EST
