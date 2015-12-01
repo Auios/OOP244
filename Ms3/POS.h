@@ -12,16 +12,4 @@
 #define MAX_MIN  (59)
 
 #define MAX_NO_ITEMS (2000)
-
-
-#include <iostream>
-
-namespace sict
-{
-	class POSIO
-	{
-	private:
-	public:
-	};
-}
 #endif

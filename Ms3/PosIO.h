@@ -2,7 +2,7 @@
 #ifndef SICT_POSIO_H__
 #define SICT_POSIO_H__
 
-#include "fstream"
+#include <fstream>
 
 namespace sict
 {
