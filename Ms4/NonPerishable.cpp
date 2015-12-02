@@ -26,13 +26,78 @@ namespace sict
 
 	std::ostream& NonPerishable::write(std::ostream& os, bool linear)const
 	{
-		if (!isEmpty())
+
+		if(_err.isClear())
 		{
-			return os << _sku << _name << _quantity << _price << _taxed;
+			if(linear)
+			{
+				int len = 20;
+				char tmpNme[len+1];
+
+				strncpy(tmpNme,_name,len);
+				tmpNme[len] = 0;
+
+				return os
+
+				<< setfill(' ')
+
+				<< setw(MAX_SKU_LEN)
+				<< left
+				<< _sku
+
+				<< "|"
+
+				<< setw(len)
+				<< left
+				<< _tmpNme
+
+				<< "|";
+
+				<< setw(7)
+				<< setprecision(2)
+				<< right
+				<< _price
+
+				if(_taxed){<< "| t |"}else{<< "|   |"}
+
+				<< setw(4)
+				<< right
+				<< quantity
+
+				<< "|"
+
+				<< setw(9)
+				<< setprecision(2)
+				<< right
+				<< _price
+			}
+			else
+			{
+				int len = 80;
+				char tmpNme[len+1];
+
+				strncpy(tmpNme,_name,len);
+				tmpNme[len] = 0;
+
+				return os
+
+				<< "Name:" << endl
+				<< tmpNme << endl
+				<< "Sku: " << _sku << endl
+				<< "Price: " << _price << endl
+
+				if(_taxed)
+					{<< "Price after tax: " << cost() << endl}
+				else
+					{<< "Price after tax: N/A" << endl}
+
+				<< "Quantity: " << _quantity << endl
+				<< "Total Cost: " cost()*quantity << endl;
+			}
 		}
 		else
 		{
-			return os;
+			return os << _err;
 		}
 	}
 	std::istream& NonPerishable::read(std::istream& is)
@@ -65,8 +130,23 @@ namespace sict
 
 	}
 
-	fstream& NonPerishable::load(fstream& file)
+	std::fstream& NonPerishable::load(std::fstream& fs)
 	{
-
+		double tPrice;
+		int tInt;
+		char t[1000];
+		fs.getline(t, 1000, ',');
+		sku(t);
+		fs.getline(t, 1000, ',');
+		name(t);
+		fs << tPrice;
+		price(tPrice);
+		fs.ignore(',');
+		fs << tInt;
+		taxed(tInt);
+		fs.ignore(',');
+		fs << tInt;
+		quantity(tInt);
+		return fs;
 	}
 }
