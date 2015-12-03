@@ -100,6 +100,7 @@ namespace sict
 			return os << _err;
 		}
 	}
+	
 	std::istream& NonPerishable::read(std::istream& is)
 	{
 		char buf[2000];
