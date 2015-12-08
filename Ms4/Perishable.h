@@ -1,5 +1,5 @@
-#ifndef _SICT_Perishable_H
-#define _SICT_Perishable_H
+#ifndef _SICT_Perishable_H_
+#define _SICT_Perishable_H_
 
 namespace sict
 {

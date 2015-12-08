@@ -1,8 +1,10 @@
-#ifndef _SICT_ITEM_H
-#define _SICT_ITEM_H
+#ifndef _SICT_ITEM_H_
+#define _SICT_ITEM_H_
 
 #include "POS.h"
 #include "PosIO.h"
+#include <iostream>
+#include <fstream>
 
 namespace sict
 {
@@ -10,7 +12,7 @@ namespace sict
 	{
 	protected:
 		//Local variables
-		char _sku[MAX_SKU_LEN-1];
+		char _sku[MAX_SKU_LEN + 1];
 		char* _name;
 		double _price;
 		bool _taxed;

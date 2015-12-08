@@ -1,7 +1,7 @@
+#include "NonPerishable.h"
 #include <iostream>
 #include <iomanip>
 #include <cstring>
-#include "NonPerishable.h"
 
 using namespace std;
 
@@ -27,144 +27,102 @@ namespace sict
 
 	std::ostream& NonPerishable::write(std::ostream& os, bool linear)const
 	{
-		const int len = 20;
-		char tmpNme[len + 1];
+		char buffer[21];
 
-		if(_err.isClear())
+		if (!_err.isClear())
 		{
-			if(linear)
-				strncpy(tmpNme,_name,len);
-				tmpNme[len] = 0;
-
+			return os << _err;
+		}
+		else
+		{
+			if (linear)
+			{
+				strncpy(buffer, _name, strlen(buffer));
+				buffer[strlen(buffer)] = 0;
 				if (_taxed)
 				{
-					return os
-						<< setfill(' ')
-
-						<< setw(MAX_SKU_LEN)
-						<< left
-						<< _sku
-
-						<< "|"
-
-						<< setw(len)
-						<< left
-						<< tmpNme
-
-						<< "|"
-
-						<< setw(7)
-						<< setprecision(2)
-						<< right
-						<< _price
-
-						<< "| t |"
-
-						<< setw(4)
-						<< right
-						<< _quantity
-
-						<< "|"
-
-						<< setw(9)
-						<< setprecision(2)
-						<< right
-						<< _price;
+					os << left << setw(MAX_SKU_LEN)
+						<< _sku << "|" << left << setw(20)
+						<< _name << "|" << right << setprecision(2) << std::setw(7)
+						<< _price << "| t |" << setw(4) << right
+						<< _quantity << "|" << setw(9) << setprecision(2) << right << cost() << "|";
+					return os;
 				}
 				else
 				{
-					return os
-					<< setfill(' ')
-
-					<< setw(MAX_SKU_LEN)
-					<< left
-					<< _sku
-
-					<< "|"
-
-					<< setw(len)
-					<< left
-					<< tmpNme
-
-					<< "|"
-
-					<< setw(7)
-					<< setprecision(2)
-					<< right
-					<< _price
-
-					<< "|   |"
-
-					<< setw(4)
-					<< right
-					<< _quantity
-
-					<< "|"
-
-					<< setw(9)
-					<< setprecision(2)
-					<< right
-					<< _price;
+					os << left << setw(MAX_SKU_LEN)
+						<< _sku << "|" << left << setw(20)
+						<< _name << "|" << right << setprecision(2) << std::setw(7)
+						<< _price << "|   |" << setw(4) << right
+						<< _quantity << "|" << setw(9) << setprecision(2) << right << cost() << "|";
+					return os;
 				}
 			}
 			else
 			{
-				if (_taxed)
-				{
-					strncpy(tmpNme, _name, len);
-					tmpNme[len] = 0;
-
-					return os
-					<< "Name:" << endl
-					<< tmpNme << endl
-					<< "Sku: " << _sku << endl
-					<< "Price: " << _price << endl
-					<< "Price after tax: " << cost() << endl
-					<< "Quantity: " << _quantity << endl
-					<< "Total Cost: " cost() * _quantity << endl;
+				if (_taxed) {
+					os << setw(80) << "Name: " << _name << endl
+						<< "Sku: " << _sku << endl
+						<< "Price: " << _price << endl
+						<< "Price after tax: " << cost() << endl
+						<< "Quantity: " << _quantity << endl
+						<< "Total Cost: " << _quantity * cost() << endl;
+					return os;
 				}
-				else
-				{
-					strncpy(tmpNme, _name, len);
-					tmpNme[len] = 0;
-
-					return os
-					<< "Name:" << endl
-					<< tmpNme << endl
-					<< "Sku: " << _sku << endl
-					<< "Price: " << _price << endl
-					<< "Price after tax: N/A" << endl
-					<< "Quantity: " << _quantity << endl
-					<< "Total Cost: " cost() * _quantity << endl;
+				else {
+					os << setw(80) << "Name: " << _name << endl
+						<< "Sku: " << _sku << endl
+						<< "Price: " << _price << endl
+						<< "Price after tax: " << "N/A" << endl
+						<< "Quantity: " << _quantity << endl
+						<< "Total Cost: " << _quantity * cost() << endl;
+					return os;
 				}
 			}
-		}
-		else
-		{
-			return os << _err.;
 		}
 	}
 	
 	std::istream& NonPerishable::read(std::istream& is)
 	{
-		char buf[2000];
-		double dbuf;
-		int ibuf;
-		std::cout << "sku: ";
-		is >> buf;
-		sku(buf);
-		std::cout << "name (no spaces): ";
-		is >> buf;
-		name(buf);
-		std::cout << "qty: ";
-		is >> ibuf;
-		quantity(ibuf);
-		std::cout << "is taxed? (1/0): ";
-		is >> ibuf;
-		taxed(bool(ibuf));
-		std::cout << "price: ";
-		is >> dbuf;
-		price(dbuf);
+		double tPrice;
+		int tInt;
+		char t[1000];
+		char t2[1000];
+		char sub;
+
+		std::cout << "Non-Perishable Item Entry: " << std::endl;
+		std::cout << "Sku: ";
+		is.getline(t, 1000);
+		sku(t);
+		std::cout << "Name: " << std::endl;;
+		is.getline(t, 1000);
+		name(t);
+		std::cout << "Price: ";
+		is >> tPrice;
+		is.ignore(1000, '\n');
+		if (is.fail()) {
+			_err.message("Invalid Price Entry");
+			return is;
+		}
+		price(tPrice);
+
+		std::cout << "Taxed: ";
+		is.getline(t2, 1000);
+
+		if (strlen(t2) > 2) {
+			_err.message("Invalid Taxed Entry, (y)es or (n)o");
+			is.setstate(std::ios::failbit);
+			return is;
+		}
+		taxed(true);
+		std::cout << "Quantity: ";
+		is >> tInt;
+		if (is.fail()) {
+			_err.message("Invalid Quantity Entry");
+			return is;
+		}
+		quantity(tInt);
+		is.ignore(1000, '\n');
 		return is;
 	}
 
@@ -172,7 +130,8 @@ namespace sict
 
 	fstream& NonPerishable::save(fstream& file)const
 	{
-
+		file << "N," << _sku << "," << _name << "," << _price << "," << _taxed << "," << _quantity << endl;
+		return file;
 	}
 
 	std::fstream& NonPerishable::load(std::fstream& fs)

@@ -1,8 +1,9 @@
-#ifndef _SICT_NonPerishable_H
-#define _SICT_NonPerishable_H
+#ifndef _SICT_NonPerishable_H_
+#define _SICT_NonPerishable_H_
 
 #include "Item.h"
 #include "ErrorMessage.h"
+#include "Date.h"
 
 namespace sict
 {
@@ -17,8 +18,5 @@ namespace sict
 		std::ostream& write(std::ostream& os, bool linear)const;
 		std::istream& read(std::istream& is);
 	};
-
-	std::ostream& operator<<(std::ostream&, const NonPerishable&);
-	std::istream& operator>>(std::istream&, NonPerishable&);
 }
 #endif
