@@ -1,4 +1,5 @@
 #include <iostream>
+#include <iomanip>
 #include <cstring>
 #include "NonPerishable.h"
 
@@ -26,78 +27,121 @@ namespace sict
 
 	std::ostream& NonPerishable::write(std::ostream& os, bool linear)const
 	{
+		const int len = 20;
+		char tmpNme[len + 1];
 
 		if(_err.isClear())
 		{
 			if(linear)
-			{
-				int len = 20;
-				char tmpNme[len+1];
-
 				strncpy(tmpNme,_name,len);
 				tmpNme[len] = 0;
 
-				return os
+				if (_taxed)
+				{
+					return os
+						<< setfill(' ')
 
-				<< setfill(' ')
+						<< setw(MAX_SKU_LEN)
+						<< left
+						<< _sku
 
-				<< setw(MAX_SKU_LEN)
-				<< left
-				<< _sku
+						<< "|"
 
-				<< "|"
+						<< setw(len)
+						<< left
+						<< tmpNme
 
-				<< setw(len)
-				<< left
-				<< _tmpNme
+						<< "|"
 
-				<< "|";
+						<< setw(7)
+						<< setprecision(2)
+						<< right
+						<< _price
 
-				<< setw(7)
-				<< setprecision(2)
-				<< right
-				<< _price
+						<< "| t |"
 
-				if(_taxed){<< "| t |"}else{<< "|   |"}
+						<< setw(4)
+						<< right
+						<< _quantity
 
-				<< setw(4)
-				<< right
-				<< quantity
+						<< "|"
 
-				<< "|"
+						<< setw(9)
+						<< setprecision(2)
+						<< right
+						<< _price;
+				}
+				else
+				{
+					return os
+					<< setfill(' ')
 
-				<< setw(9)
-				<< setprecision(2)
-				<< right
-				<< _price
+					<< setw(MAX_SKU_LEN)
+					<< left
+					<< _sku
+
+					<< "|"
+
+					<< setw(len)
+					<< left
+					<< tmpNme
+
+					<< "|"
+
+					<< setw(7)
+					<< setprecision(2)
+					<< right
+					<< _price
+
+					<< "|   |"
+
+					<< setw(4)
+					<< right
+					<< _quantity
+
+					<< "|"
+
+					<< setw(9)
+					<< setprecision(2)
+					<< right
+					<< _price;
+				}
 			}
 			else
 			{
-				int len = 80;
-				char tmpNme[len+1];
+				if (_taxed)
+				{
+					strncpy(tmpNme, _name, len);
+					tmpNme[len] = 0;
 
-				strncpy(tmpNme,_name,len);
-				tmpNme[len] = 0;
-
-				return os
-
-				<< "Name:" << endl
-				<< tmpNme << endl
-				<< "Sku: " << _sku << endl
-				<< "Price: " << _price << endl
-
-				if(_taxed)
-					{<< "Price after tax: " << cost() << endl}
+					return os
+					<< "Name:" << endl
+					<< tmpNme << endl
+					<< "Sku: " << _sku << endl
+					<< "Price: " << _price << endl
+					<< "Price after tax: " << cost() << endl
+					<< "Quantity: " << _quantity << endl
+					<< "Total Cost: " cost() * _quantity << endl;
+				}
 				else
-					{<< "Price after tax: N/A" << endl}
+				{
+					strncpy(tmpNme, _name, len);
+					tmpNme[len] = 0;
 
-				<< "Quantity: " << _quantity << endl
-				<< "Total Cost: " cost()*quantity << endl;
+					return os
+					<< "Name:" << endl
+					<< tmpNme << endl
+					<< "Sku: " << _sku << endl
+					<< "Price: " << _price << endl
+					<< "Price after tax: N/A" << endl
+					<< "Quantity: " << _quantity << endl
+					<< "Total Cost: " cost() * _quantity << endl;
+				}
 			}
 		}
 		else
 		{
-			return os << _err;
+			return os << _err.;
 		}
 	}
 	
