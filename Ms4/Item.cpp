@@ -114,9 +114,10 @@ namespace sict
 		strcpy(_sku, sku);
 	}
 
-	void Item::name(const char* name)
+	void Item::name(const char* nme)
 	{
-		strcpy(_name, name);
+		_name = new char[strlen(nme) + 1];
+		strcpy(_name, nme);
 	}
 
 	void Item::price(const double price)

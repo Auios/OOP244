@@ -26,7 +26,7 @@ namespace sict
 
 	// RW
 
-	std::ostream& NonPerishable::write(std::ostream& os, bool linear)const
+	ostream& NonPerishable::write(ostream& os, bool linear)const
 	{
 		char buffer[21];
 
@@ -83,24 +83,24 @@ namespace sict
 		}
 	}
 	
-	std::istream& NonPerishable::read(std::istream& is)
+	istream& NonPerishable::read(istream& is)
 	{
 		double tmpPrice = 0;
 		int tmpInt = 0;
 		char tmp[1000];
 		char tmp2[1000];
 
-		std::cout << "Non-Perishable Item Entry: " << std::endl;
+		cout << "Non-Perishable Item Entry: " << std::endl;
 
-		std::cout << "Sku: ";
+		cout << "Sku: ";
 		is.getline(tmp, 1000);
 		sku(tmp);
 
-		std::cout << "Name: " << std::endl;;
+		cout << "Name: " << std::endl;;
 		is.getline(tmp, 1000);
 		name(tmp);
 
-		std::cout << "Price: ";
+		cout << "Price: ";
 		is >> tmpPrice;
 		is.ignore(1000, '\n');
 
@@ -111,7 +111,7 @@ namespace sict
 		}
 		price(tmpPrice);
 
-		std::cout << "Taxed: ";
+		cout << "Taxed: ";
 		is.getline(tmp2, 1000);
 
 		if (strlen(tmp2) > 2) {
@@ -121,7 +121,7 @@ namespace sict
 		}
 
 		taxed(true);
-		std::cout << "Quantity: ";
+		cout << "Quantity: ";
 		is >> tmpInt;
 
 		if (is.fail())
@@ -143,7 +143,7 @@ namespace sict
 		return file;
 	}
 
-	std::fstream& NonPerishable::load(std::fstream& file)
+	fstream& NonPerishable::load(fstream& file)
 	{
 		double tmpPrice = 0;
 		int tmpInt = 0;
