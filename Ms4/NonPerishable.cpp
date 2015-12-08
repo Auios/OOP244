@@ -1,4 +1,5 @@
 #include "NonPerishable.h"
+
 #include <iostream>
 #include <iomanip>
 #include <cstring>
@@ -84,44 +85,52 @@ namespace sict
 	
 	std::istream& NonPerishable::read(std::istream& is)
 	{
-		double tPrice;
-		int tInt;
-		char t[1000];
-		char t2[1000];
-		char sub;
+		double tmpPrice = 0;
+		int tmpInt = 0;
+		char tmp[1000];
+		char tmp2[1000];
 
 		std::cout << "Non-Perishable Item Entry: " << std::endl;
+
 		std::cout << "Sku: ";
-		is.getline(t, 1000);
-		sku(t);
+		is.getline(tmp, 1000);
+		sku(tmp);
+
 		std::cout << "Name: " << std::endl;;
-		is.getline(t, 1000);
-		name(t);
+		is.getline(tmp, 1000);
+		name(tmp);
+
 		std::cout << "Price: ";
-		is >> tPrice;
+		is >> tmpPrice;
 		is.ignore(1000, '\n');
-		if (is.fail()) {
+
+		if (is.fail())
+		{
 			_err.message("Invalid Price Entry");
 			return is;
 		}
-		price(tPrice);
+		price(tmpPrice);
 
 		std::cout << "Taxed: ";
-		is.getline(t2, 1000);
+		is.getline(tmp2, 1000);
 
-		if (strlen(t2) > 2) {
+		if (strlen(tmp2) > 2) {
 			_err.message("Invalid Taxed Entry, (y)es or (n)o");
 			is.setstate(std::ios::failbit);
 			return is;
 		}
+
 		taxed(true);
 		std::cout << "Quantity: ";
-		is >> tInt;
-		if (is.fail()) {
+		is >> tmpInt;
+
+		if (is.fail())
+		{
 			_err.message("Invalid Quantity Entry");
 			return is;
 		}
-		quantity(tInt);
+
+		quantity(tmpInt);
 		is.ignore(1000, '\n');
 		return is;
 	}
@@ -134,23 +143,29 @@ namespace sict
 		return file;
 	}
 
-	std::fstream& NonPerishable::load(std::fstream& fs)
+	std::fstream& NonPerishable::load(std::fstream& file)
 	{
-		double tPrice;
-		int tInt;
-		char t[1000];
-		fs.getline(t, 1000, ',');
-		sku(t);
-		fs.getline(t, 1000, ',');
-		name(t);
-		fs << tPrice;
-		price(tPrice);
-		fs.ignore(',');
-		fs << tInt;
-		taxed(tInt);
-		fs.ignore(',');
-		fs << tInt;
-		quantity(tInt);
-		return fs;
+		double tmpPrice = 0;
+		int tmpInt = 0;
+		char buffer[1000];
+
+		file.getline(buffer, 1000, ',');
+		sku(buffer);
+
+		file.getline(buffer, 1000, ',');
+		name(buffer);
+
+		file << tmpPrice;
+		price(tmpPrice);
+
+		file.ignore(',');
+		file << tmpInt;
+		taxed(tmpInt);
+
+		file.ignore(',');
+		file << tmpInt;
+		quantity(tmpInt);
+
+		return file;
 	}
 }

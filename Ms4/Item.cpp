@@ -45,13 +45,13 @@ namespace sict
 			_sku[i] = src._sku[i];
 		}
 
-		if (src._name != nullptr) {
+		if (src._name != 0) {
 			_name = new char[strlen(src._name) + 1];
 			strcpy(_name, src._name);
 		}
 		else
 		{
-			_name = nullptr;
+			_name = 0;
 		}
 
 		_isEmpty = false;
@@ -77,14 +77,14 @@ namespace sict
 			_sku[i] = src._sku[i];
 		}
 		delete[] _name;
-		if (src._name != nullptr)
+		if (src._name != 0)
 		{
 			_name = new char[strlen(src._name) + 1];
 			strcpy(_name, src._name);
 		}
 		else
 		{
-			_name = nullptr;
+			_name = 0;
 		}
 
 		return *this;

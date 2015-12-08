@@ -43,7 +43,7 @@ int main(){
   fstream npfile(FileName, ios::out);
   NonPerishable np;
   bool ok = true;
-  int i;
+  //int i;
   cout << "--NonPerishable Error Handling test:" << endl;
   cout << "Each test must display the error message related to the test." << endl << endl;
   cout << "----Price validation test:" << endl;
