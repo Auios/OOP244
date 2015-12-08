@@ -21,7 +21,6 @@ namespace sict
 	istream& operator>>(istream& is, NonPerishable& A)
 	{
 		return A.read(is);
-
 	}
 
 	// RW
@@ -32,7 +31,7 @@ namespace sict
 
 		if (!_err.isClear())
 		{
-			return os << _err;
+			return os << _err; //??????????????????????????????
 		}
 		else
 		{
@@ -106,7 +105,7 @@ namespace sict
 
 		if (is.fail())
 		{
-			_err.message("Invalid Price Entry");
+			_err.message("Invalid Price Entry"); //???????????????????
 			return is;
 		}
 		price(tmpPrice);
