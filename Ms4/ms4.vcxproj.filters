@@ -24,13 +24,16 @@
     <ClCompile Include="Item.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Perishable.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="NonPerishable.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="01-NPErrHandling.cpp">
+    <ClCompile Include="Perishable.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="ms4tester.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="06-PerDisplayTest.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
@@ -44,16 +47,16 @@
     <ClInclude Include="Item.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="POS.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="PosIO.h">
+    <ClInclude Include="NonPerishable.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="Perishable.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="NonPerishable.h">
+    <ClInclude Include="POS.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="PosIO.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

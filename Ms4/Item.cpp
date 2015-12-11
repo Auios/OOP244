@@ -190,16 +190,11 @@ namespace sict
 
 	ostream& operator<<(ostream& os, const Item& A)
 	{
-		if (!A.isEmpty())
-		{
-			return A.write(os, true);
-		}
-		return os;
+		return A.write(os, true);
 	}
 	istream& operator>>(istream& is, Item& A)
 	{
 		return A.read(is);
-
 	}
 
 	//RW

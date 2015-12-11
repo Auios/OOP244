@@ -36,6 +36,11 @@ namespace sict
 		_readErrorCode = NO_ERROR;
 	}
 
+	void Date::resetError()
+	{
+		_readErrorCode = NO_ERROR;
+	}
+
 	int Date::value()const
 	{
 		return _year * 535680 + _month * 44640 + _day * 1440 + _hour * 60 + _min;
@@ -90,7 +95,14 @@ namespace sict
 
 	bool Date::bad()const
 	{
-		return !!_readErrorCode;
+		if (_readErrorCode == NO_ERROR)
+		{
+			return false;
+		}
+		else
+		{
+			return true;
+		}
 	}
 
 	bool Date::dateOnly()const
@@ -140,18 +152,24 @@ namespace sict
 
 	int Date::valid()
 	{
+		//_readErrorCode = NO_ERROR;
+		errCode(NO_ERROR);
+
 		if(_dateOnly)
 		{
 			if (_year > MAX_YEAR || _year < MIN_YEAR)
 			{
+				_year = MIN_YEAR + 1;
 				return YEAR_ERROR;
 			}
 			else if (_month > 12 || _month < 1)
 			{
+				_month = 1;
 				return MON_ERROR;
 			}
-			else if (_day < 0 || _day > mdays())
+			else if (_day <= 0 || _day > mdays())
 			{
+				_day = 1;
 				return DAY_ERROR;
 			}
 		}
@@ -160,22 +178,27 @@ namespace sict
 		{	
 			if (_year > MAX_YEAR || _year < MIN_YEAR)
 			{
+				_year = MIN_YEAR + 1;
 				return YEAR_ERROR;
 			}
 			else if (_month > 12 || _month < 1)
 			{
+				_month = 1;
 				return MON_ERROR;
 			}
-			else if (_day < 0 || _day > mdays())
+			else if (_day <= 0 || _day > mdays())
 			{
+				_day = 1;
 				return DAY_ERROR;
 			}
-			else if(_hour < 0 || _hour > MAX_HOUR)
+			else if(_hour <= 0 || _hour > MAX_HOUR)
 			{
+				_hour = 1;
 				return HOUR_ERROR;
 			}
-			else if(_min < 0 || _min > MAX_MIN)
+			else if(_min <= 0 || _min > MAX_MIN)
 			{
+				_min = 1;
 				return MIN_ERROR;
 			}
 		}
@@ -184,13 +207,33 @@ namespace sict
 
 	std::istream& Date::read(std::istream& is)
 	{
+		//_readErrorCode = NO_ERROR;
+		errCode(NO_ERROR);
+
 		is >> _year;
-		is.ignore(4,'/');
+		//is.ignore(4,'/');
+		is.get();
+		if (is.fail())
+		{
+			_readErrorCode = CIN_FAILED;
+			return is;
+		}
 
 		is >> _month;
-		is.ignore(2,'/');
+		//is.ignore(2,'/');
+		is.get();
+		if (is.fail())
+		{
+			_readErrorCode = CIN_FAILED;
+			return is;
+		}
 
 		is >> _day;
+		if (is.fail())
+		{
+			_readErrorCode = CIN_FAILED;
+			return is;
+		}
 
 		if(!_dateOnly)
 		{
@@ -198,15 +241,27 @@ namespace sict
 
 			is >> _hour;
 			is.ignore(2,':');
+			if (is.fail())
+			{
+				_readErrorCode = CIN_FAILED;
+				return is;
+			}
 
 			is >> _min;
+			if (is.fail())
+			{
+				_readErrorCode = CIN_FAILED;
+				return is;
+			}
 		}
-		
-		errCode(valid());
-		if (is.fail())
+
+		if (_readErrorCode != CIN_FAILED)
 		{
-			_readErrorCode = CIN_FAILED;
-			return is;
+			errCode(valid());
+		}
+		else
+		{
+			errCode(CIN_FAILED);
 		}
 		
 		return is;

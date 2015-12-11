@@ -11,9 +11,9 @@
     </ProjectConfiguration>
   </ItemGroup>
   <PropertyGroup Label="Globals">
-    <ProjectGuid>{570C40A5-A437-40F2-B8B5-69F9F8D213D3}</ProjectGuid>
+    <ProjectGuid>{20C01AEB-D634-48B5-8906-3263EAEDD5C5}</ProjectGuid>
     <Keyword>Win32Proj</Keyword>
-    <RootNamespace>ms4</RootNamespace>
+    <RootNamespace>Ms4</RootNamespace>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
@@ -76,10 +76,11 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="01-NPErrHandling.cpp" />
+    <ClCompile Include="06-PerDisplayTest.cpp" />
     <ClCompile Include="Date.cpp" />
     <ClCompile Include="ErrorMessage.cpp" />
     <ClCompile Include="Item.cpp" />
+    <ClCompile Include="ms4tester.cpp" />
     <ClCompile Include="NonPerishable.cpp" />
     <ClCompile Include="Perishable.cpp" />
   </ItemGroup>

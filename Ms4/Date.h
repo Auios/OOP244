@@ -43,6 +43,8 @@ namespace sict
 			void set();
 			void set(int year, int month, int day, int hour, int min);
 
+			void resetError();
+
 			int mdays()const;
 
 			bool bad()const;

@@ -1,0 +1,10 @@
+
+In line number 14 of your output:
+The output should be:
+Name:
+But your output is: 
+Name: 
+     ^
+-----|
+Professors character ASCII code: hex(d), dec(13)
+un-matched character ASCII code: hex(20), dec(32)

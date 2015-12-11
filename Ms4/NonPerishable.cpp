@@ -43,25 +43,25 @@ namespace sict
 				{
 					os << left << setw(MAX_SKU_LEN)
 						<< _sku << "|" << left << setw(20)
-						<< _name << "|" << right << setprecision(2) << std::setw(7)
+						<< _name << "|" << right << fixed << setprecision(2) << std::setw(7)
 						<< _price << "| t |" << setw(4) << right
-						<< _quantity << "|" << setw(9) << setprecision(2) << right << cost() << "|";
+						<< _quantity << "|" << setw(9) << setprecision(2) << right << cost() * quantity() << "|";
 					return os;
 				}
 				else
 				{
 					os << left << setw(MAX_SKU_LEN)
 						<< _sku << "|" << left << setw(20)
-						<< _name << "|" << right << setprecision(2) << std::setw(7)
+						<< _name << "|" << right << fixed << setprecision(2) << std::setw(7)
 						<< _price << "|   |" << setw(4) << right
-						<< _quantity << "|" << setw(9) << setprecision(2) << right << cost() << "|";
+						<< _quantity << "|" << setw(9) << setprecision(2) << right << cost() * quantity() << "|";
 					return os;
 				}
 			}
 			else
 			{
 				if (_taxed) {
-					os << setw(80) << "Name: " << _name << endl
+					os << "Name:" << endl << _name << endl
 						<< "Sku: " << _sku << endl
 						<< "Price: " << _price << endl
 						<< "Price after tax: " << cost() << endl
@@ -70,7 +70,7 @@ namespace sict
 					return os;
 				}
 				else {
-					os << setw(80) << "Name: " << _name << endl
+					os << "Name:" << endl << _name << endl
 						<< "Sku: " << _sku << endl
 						<< "Price: " << _price << endl
 						<< "Price after tax: " << "N/A" << endl
@@ -86,40 +86,52 @@ namespace sict
 	{
 		double tmpPrice = 0;
 		int tmpInt = 0;
-		char tmp[1000];
-		char tmp2[1000];
+		char buffer[1000];
+		char sBuff = 0;
 
-		cout << "Non-Perishable Item Entry: " << std::endl;
+		_err.clear();
+		is.clear();
+
+		cout << "NonPerishable Item Entry:" << std::endl;
 
 		cout << "Sku: ";
-		is.getline(tmp, 1000);
-		sku(tmp);
+		is.getline(buffer, 1000);
+		sku(buffer);
 
-		cout << "Name: " << std::endl;;
-		is.getline(tmp, 1000);
-		name(tmp);
+		cout << "Name:" << endl;
+		is.getline(buffer, 1000);
+		name(buffer);
 
 		cout << "Price: ";
 		is >> tmpPrice;
-		is.ignore(1000, '\n');
+		//is.ignore(1000, '\n');
 
 		if (is.fail())
 		{
 			_err.message("Invalid Price Entry"); //???????????????????
+			//is.setstate(ios::failbit);
 			return is;
 		}
 		price(tmpPrice);
 
 		cout << "Taxed: ";
-		is.getline(tmp2, 1000);
-
-		if (strlen(tmp2) > 2) {
+		is >> sBuff;
+		
+		if ('Y' != toupper(sBuff) && 'N' != toupper(sBuff))
+		{
 			_err.message("Invalid Taxed Entry, (y)es or (n)o");
-			is.setstate(std::ios::failbit);
+			is.setstate(ios::failbit);
+
 			return is;
 		}
+		else
+		{
+			if (toupper(sBuff) == 'N')
+				{taxed(false);}
+			else
+				{taxed(true);}
+		}
 
-		taxed(true);
 		cout << "Quantity: ";
 		is >> tmpInt;
 
@@ -128,9 +140,9 @@ namespace sict
 			_err.message("Invalid Quantity Entry");
 			return is;
 		}
-
 		quantity(tmpInt);
-		is.ignore(1000, '\n');
+		//is.ignore(1000, '\n');
+
 		return is;
 	}
 
@@ -154,15 +166,15 @@ namespace sict
 		file.getline(buffer, 1000, ',');
 		name(buffer);
 
-		file << tmpPrice;
+		file >> tmpPrice;
 		price(tmpPrice);
 
-		file.ignore(',');
-		file << tmpInt;
+		file.ignore(1000,',');
+		file >> tmpInt;
 		taxed(tmpInt);
 
-		file.ignore(',');
-		file << tmpInt;
+		file.ignore(1000, ',');
+		file >> tmpInt;
 		quantity(tmpInt);
 
 		return file;
