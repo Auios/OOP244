@@ -1,10 +1,10 @@
 
-In line number 76 of your output:
+In line number 112 of your output:
 The output should be:
-v-----------------------------------v
+v--------------------------------------------------------v
 But your output is: 
-Name:
+
 ^
 |
 Professors character ASCII code: hex(76), dec(118)
-un-matched character ASCII code: hex(4e), dec(78)
+un-matched character ASCII code: hex(d), dec(13)

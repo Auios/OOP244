@@ -250,9 +250,9 @@ namespace sict
 		Item* items = 0;
 
 		data.open(_billfname, ios::in);
-		cout << endl
+		cout
 			<< "v--------------------------------------------------------v" << endl
-			<< "| " << date << setw(48) << setfill(' ') << "|" << endl
+			<< "| " << date << setw(39) << setfill(' ') << "|" << endl
 			<< "| SKU    | Item Name          | Price |TX |Qty |   Total |" << endl
 			<< "|--------|--------------------|-------|---|----|---------|" << endl;
 
@@ -277,7 +277,7 @@ namespace sict
 				if(items)
 				{
 					items->load(data);
-					cout << "| ";
+					cout << "|";
 					items->write(cout, true);
 					cout << endl;
 					total += *items;
@@ -340,9 +340,9 @@ namespace sict
 				if (match != -1)
 				{
 					cout
-						<< "v-------------------->" << endl
-						<< "|" << _items[match]->name() << endl
-						<< "^-------------------->" << endl;
+						<< "v------------------->" << endl
+						<< "| " << _items[match]->name() << endl
+						<< "^------------------->" << endl;
 
 					addToBill(*_items[match]);
 				}
@@ -392,21 +392,22 @@ namespace sict
 					<< "Please enter the SKU: ";
 				cin >> sku;
 				
-				cout << "v-----------------------------------v" << endl;
+				cout << "v-----------------------------------v";
 
 				match = searchItems(sku);
 
 				
 				if (match != -1)
 				{
-					cout << endl << "|" << _items[match]->write(cout, false) << endl;
+					cout << endl;
+					_items[match]->write(cout, false);
 				}
 				else
 				{
-					cout << "Not found!" << endl;
+					cout << "Not found!";
 				}
 
-				cout << "^-----------------------------------^" << endl;
+				cout << "^-----------------------------------^" << endl << endl;
 				break;
 
 			case 6:

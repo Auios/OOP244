@@ -1,4 +1,4 @@
-Script started on Sat 12 Dec 2015 01:51:18 PM EST
+Script started on Sat 12 Dec 2015 02:51:37 PM EST
 fpcango@matrix:~/Adat/OOP244/Milestone/5> fp
 The OOPs Store
 1- List items
@@ -73,6 +73,7 @@ The OOPs Store
 > 5
 
 Please enter the SKU: 1234
+v-----------------------------------v
 Name:
 Milk
 Sku: 1234
@@ -81,9 +82,8 @@ Price after tax: N/A
 Quantity: 10
 Total Cost: 39.90
 Expiry date: 2015/12/02
-v-------------------->
-|0x80511c4
-^-------------------->
+^-----------------------------------^
+
 The OOPs Store
 1- List items
 2- Add Perishable item
@@ -95,28 +95,28 @@ The OOPs Store
 > 6
 
 Sku: 1234
-v-------------------->
-|Milk
-^-------------------->
+v------------------->
+| Milk
+^------------------->
 Sku: 4567
-v-------------------->
-|Muffin
-^-------------------->
+v------------------->
+| Muffin
+^------------------->
 Sku: 4567
-v-------------------->
-|Muffin
-^-------------------->
+v------------------->
+| Muffin
+^------------------->
 Sku: 4567
 Not found!
 Sku: 
 
 v--------------------------------------------------------v
-| 2015/12/12, 13:51                                               |
+| 2015/12/12, 14:52                                      |
 | SKU    | Item Name          | Price |TX |Qty |   Total |
 |--------|--------------------|-------|---|----|---------|
-| 1234   |Milk                |   3.99|  p|   1|     3.99|
-| 4567   |Muffin              |   0.75| tp|   1|     0.85|
-| 4567   |Muffin              |   0.75| tp|   1|     0.85|
+|1234   |Milk                |   3.99|  p|   1|     3.99|
+|4567   |Muffin              |   0.75| tp|   1|     0.85|
+|4567   |Muffin              |   0.75| tp|   1|     0.85|
 ^--------^--------------------^-------^---^----^---------^
 Total: $5.48
 
@@ -134,4 +134,4 @@ Goodbye!!
 cango@matrix:~/Adat/OOP244/Milestone/5> exit
 exit
 
-Script done on Sat 12 Dec 2015 01:52:02 PM EST
+Script done on Sat 12 Dec 2015 02:52:10 PM EST
