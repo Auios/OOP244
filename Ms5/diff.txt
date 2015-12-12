@@ -1,0 +1,10 @@
+
+In line number 15 of your output:
+The output should be:
+   1 | 1234   |Milk                |   3.99|  p|   8|    31.92|
+But your output is: 
+-----^--------^--------------------^-------^---^----^---------^
+^
+|
+Professors character ASCII code: hex(20), dec(32)
+un-matched character ASCII code: hex(2d), dec(45)

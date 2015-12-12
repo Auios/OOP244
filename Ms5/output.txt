@@ -1,0 +1,30 @@
+Script started on Fri 11 Dec 2015 05:01:42 PM EST
+cango@matrix:~/Adat/OOP244/Milestone/5> fp
+The OOPs Store
+1- List items
+2- Add Perishable item
+3- Add Non-Perishable item
+4- Update item quantity
+5- Show Item
+6- POS
+0- exit program
+> 1
+
+ Row | SKU    | Item Name          | Price |TX |Qty |   Total |
+-----|--------|--------------------|-------|---|----|---------|
+-----^--------^--------------------^-------^---^----^---------^
+Total Asset: $0.00
+
+The OOPs Store
+1- List items
+2- Add Perishable item
+3- Add Non-Perishable item
+4- Update item quantity
+5- Show Item
+6- POS
+0- exit program
+> ^C
+cango@matrix:~/Adat/OOP244/Milestone/5> exit
+exit
+
+Script done on Fri 11 Dec 2015 05:01:48 PM EST
