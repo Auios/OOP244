@@ -1,10 +1,10 @@
 
-In line number 15 of your output:
+In line number 76 of your output:
 The output should be:
-   1 | 1234   |Milk                |   3.99|  p|   8|    31.92|
+v-----------------------------------v
 But your output is: 
------^--------^--------------------^-------^---^----^---------^
+Name:
 ^
 |
-Professors character ASCII code: hex(20), dec(32)
-un-matched character ASCII code: hex(2d), dec(45)
+Professors character ASCII code: hex(76), dec(118)
+un-matched character ASCII code: hex(4e), dec(78)

@@ -4,7 +4,6 @@
 #include <iostream>
 #include <iomanip>
 #include <cstring>
-#include <math.h>
 
 using namespace std;
 
@@ -87,7 +86,7 @@ namespace sict
 						<< name() << "|" << right << setw(7)
 						<< price() << "| tp|" << setw(4) << right
 						<< quantity() << "|" << setw(9) << right
-						<< ceil(100 * (cost() * quantity())) / 100 << "|";
+						<< cost() * quantity() << "|";
 				}
 				else
 				{
@@ -99,7 +98,8 @@ namespace sict
 						<< name() << "|" << right << setw(7)
 						<< price() << "|  p|" << setw(4) << right
 						<< quantity() << "|" << setw(9) << right
-						<< ceil(100 * (cost() * quantity())) / 100 << "|";
+						<< cost() * quantity() << "|";
+					return os;
 				}
 			}
 			else
@@ -112,8 +112,9 @@ namespace sict
 						<< "Price: " << price() << endl
 						<< "Price after tax: " << cost() << endl
 						<< "Quantity: " << quantity() << endl
-						<< "Total Cost: " << ceil(100 * (cost() * quantity())) / 100 << endl
+						<< "Total Cost: " << cost() * quantity() << endl
 						<< "Expiry date: " << _expiry << endl;
+					return os;
 				}
 				else
 				{
@@ -123,8 +124,9 @@ namespace sict
 						<< "Price: " << price() << endl
 						<< "Price after tax: " << "N/A" << endl
 						<< "Quantity: " << quantity() << endl
-						<< "Total Cost: " << ceil(100 * (cost() * quantity())) / 100 << endl
+						<< "Total Cost: " << cost() * quantity() << endl
 						<< "Expiry date: " << _expiry << endl;
+					return os;
 				}
 			}
 			return os;
@@ -143,13 +145,14 @@ namespace sict
 		Date tmpDate;
 		tmpDate.dateOnly(true);
 
-		cout << "Perishable Item Entry: " << endl;
+		cout << endl
+			<< "Perishable Item Entry: " << endl;
 
 		cout << "Sku: ";
 		is.getline(buffer, 1000);
 		sku(buffer);
 
-		cout << "Name: " << endl;
+		cout << "Name:" << endl;
 		is.getline(buffer, 1000);
 		name(buffer);
 

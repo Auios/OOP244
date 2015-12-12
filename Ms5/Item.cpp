@@ -166,7 +166,7 @@ namespace sict
 	{
 		if (_taxed)
 		{
-			return _price*(1 + TAX);
+			return _price+(_price * TAX);
 		}
 		return _price;
 	}
@@ -185,7 +185,7 @@ namespace sict
 
 	double operator+=(double& A, const Item& B)
 	{
-		return A = (B.price()*B.quantity() + A);
+		return A = (B.price()*B.quantity()) + A;
 	}
 
 	ostream& operator<<(ostream& os, const Item& A)

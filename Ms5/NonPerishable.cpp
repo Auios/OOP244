@@ -3,7 +3,6 @@
 #include <iostream>
 #include <iomanip>
 #include <cstring>
-#include <math.h>
 
 using namespace std;
 
@@ -73,7 +72,7 @@ namespace sict
 						<< name() << "|" << right << setw(7)
 						<< price() << "| t |" << setw(4) << right
 						<< quantity() << "|" << setw(9) << right
-						<< ceil(100 * (cost() * quantity())) / 100 << "|";
+						<< cost() * quantity() << "|";
 				}
 				else
 				{
@@ -85,7 +84,7 @@ namespace sict
 						<< name() << "|" << right << std::setw(7)
 						<< price() << "|   |" << setw(4) << right
 						<< quantity() << "|" << setw(9) << right
-						<< ceil(100 * (cost() * quantity())) / 100 << "|";
+						<< cost() * quantity() << "|";
 				}
 			}
 			else
@@ -97,7 +96,7 @@ namespace sict
 						<< "Price: " << price() << endl
 						<< "Price after tax: " << cost() << endl
 						<< "Quantity: " << quantity() << endl
-						<< "Total Cost: " << ceil(100 * (cost() * quantity())) / 100 << endl;
+						<< "Total Cost: " << cost() * quantity() << endl;
 				}
 				else {
 					os
@@ -106,7 +105,7 @@ namespace sict
 						<< "Price: " << price() << endl
 						<< "Price after tax: " << "N/A" << endl
 						<< "Quantity: " << quantity() << endl
-						<< "Total Cost: " << ceil(100 * (cost() * quantity())) / 100 << endl;
+						<< "Total Cost: " << cost() * quantity() << endl;
 				}
 			}
 			return os;
@@ -124,12 +123,13 @@ namespace sict
 		_err.clear();
 		is.clear();
 
-		cout << "Non-Perishable Item Entry:" << std::endl;
+		cout << endl
+			<< "Non-Perishable Item Entry:" << std::endl;
 
 		cout << "Sku: ";
 		is.getline(tmpSku, 1000);
 
-		cout << "Name: " << std::endl;;
+		cout << "Name:" << std::endl;;
 		is.getline(buffer, 1000);
 
 		cout << "Price: ";

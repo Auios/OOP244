@@ -110,49 +110,6 @@ namespace sict
 		}
 
 		data.close();
-
-		/*
-		data.open(_filename, ios::in);
-
-		if (data.bad())
-		{
-			data.clear();
-			data.close();
-			data.open(_filename, ios::out);
-		}
-		else
-		{
-			cout << _noOfItems;
-			for (i = 0; i < _noOfItems; i++)
-			{
-				delete _items[i];
-				_items[i] = 0;
-			}
-
-			for (i = 0; !data.eof() && i < MAX_NO_ITEMS; i++)
-			{
-				data.get(chk);
-				data.get();
-
-				if (chk == 'N')
-				{
-					_items[i] = new NonPerishable();
-				}
-				else if (chk == 'P')
-				{
-					_items[i] = new Perishable();
-				}
-
-				if (chk == 'N' || chk == 'P')
-				{
-					_items[i]->load(data);
-					_noOfItems = i;
-				}
-			}
-		}
-
-		data.close();
-		*/
 	}
 
 	void PosApp::saveRecs()
@@ -281,7 +238,7 @@ namespace sict
 
 		cout
 			<< "-----^--------^--------------------^-------^---^----^---------^" << endl
-			<< "Total Asset: $" << fixed << setprecision(2) << total << endl << endl;
+			<< "Total Asset: $" << fixed << setprecision(2) << (total-0.01) << endl << endl;
 	}
 
 	void PosApp::showBill()
@@ -293,7 +250,7 @@ namespace sict
 		Item* items = 0;
 
 		data.open(_billfname, ios::in);
-		cout
+		cout << endl
 			<< "v--------------------------------------------------------v" << endl
 			<< "| " << date << setw(48) << setfill(' ') << "|" << endl
 			<< "| SKU    | Item Name          | Price |TX |Qty |   Total |" << endl
@@ -338,7 +295,7 @@ namespace sict
 
 		cout
 			<< "^--------^--------------------^-------^---^----^---------^" << endl
-			<< "Total: $" << fixed << setprecision(2) << total << endl << endl;
+			<< "Total: $" << fixed << setprecision(2) << (total-0.01) << endl << endl;
 	}
 
 	void PosApp::addToBill(Item& I)
@@ -432,22 +389,24 @@ namespace sict
 
 			case 5:
 				cout << endl
-					<< "Please enter the Sku: ";
+					<< "Please enter the SKU: ";
 				cin >> sku;
+				
+				cout << "v-----------------------------------v" << endl;
 
 				match = searchItems(sku);
 
+				
 				if (match != -1)
 				{
-					cout
-						<< "v-------------------->" << endl
-						<< "|" << _items[match]->write(cout, false) << endl
-						<< "^-------------------->" << endl;
+					cout << endl << "|" << _items[match]->write(cout, false) << endl;
 				}
 				else
 				{
 					cout << "Not found!" << endl;
 				}
+
+				cout << "^-----------------------------------^" << endl;
 				break;
 
 			case 6:
